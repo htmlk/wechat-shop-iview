@@ -4,6 +4,8 @@ import semver from 'semver';
 import packjson from '../../package.json';
 
 let util = {
+    baseUrl:'https://shop.htmlk.cn/admin',
+    apiUrl:'https://shop.htmlk.cn/api'
 
 };
 util.title = function (title) {
@@ -12,10 +14,10 @@ util.title = function (title) {
 };
 
 const ajaxUrl = env === 'development'
-    ? 'http://127.0.0.1:8888'
+    ? 'https://shop.htmlk.cn/admin'
     : env === 'production'
-    ? 'https://www.url.com'
-    : 'https://debug.url.com';
+    ? 'https://shop.htmlk.cn/admin'
+    : 'https://shop.htmlk.cn/admin';
 
 util.ajax = axios.create({
     baseURL: ajaxUrl,

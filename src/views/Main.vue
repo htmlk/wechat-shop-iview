@@ -8,7 +8,7 @@
                 :shrink="shrink"
                 :menu-list="menuList">
                 <div slot="top" class="logo-con">
-                    <img v-show="!shrink"  src="../images/logo.jpg" key="max-logo" />
+                    <img v-show="!shrink"  src="../images/logo.png" key="max-logo" />
                     <img v-show="shrink" src="../images/logo-min.jpg" key="min-logo" />
                 </div>
             </shrinkable-menu>
@@ -32,7 +32,7 @@
                                     <DropdownItem name="loginout" divided>退出登录</DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
-                            <Avatar icon="person" style="background: #619fe7;margin-left:10px;"></Avatar>
+                            <Avatar icon="person" style="background: #619fe7;margin-left:10px;"><img :src="avatar" alt=""></Avatar>
                         </Row>
                     </div>
                 </div>
@@ -56,7 +56,8 @@ export default {
     data () {
         return {
             shrink: false,
-            userName: ''
+            userName: '',
+            avatar:''
         };
     },
     computed: {
@@ -66,12 +67,29 @@ export default {
     },
     methods: {
         init () {
-            this.userName = Cookies.get('user');
+            var userInfo= Cookies.get('userInfo')
+            var token=  Cookies.get('token')
+            if(token&&userInfo){
+                 this.userName =JSON.parse(userInfo).username
+                 this.avatar=userInfo.avatar
+                  this.$router.push({
+                name: 'goodslist'
+                });
+            }else{
+                this.$router.push({
+                name: 'login'
+                });
+            }
+           
+
+           
         },
         toggleClick () {
             this.shrink = !this.shrink;
         },
         handleClickUserDropdown (name) {
+           Cookies.remove('userInfo');
+            Cookies.remove('token');
             this.$router.push({
                 name: 'login'
             });

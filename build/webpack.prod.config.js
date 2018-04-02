@@ -9,6 +9,18 @@ const fs = require('fs');
 const path = require('path');
 const package = require('../package.json');
 
+//腾讯云cos
+const CosPlugin = require('cos-webpack');
+
+const cosPlugin = new CosPlugin({
+    secretId: 'AKIDNgpoc8V2JOI1jNiDOelkaIpBUcYJof8P',
+    secretKey: 'Vs34zjrxugGeru6FE1wnUCqJBtRnyBIE',
+    bucket: 'shopadmin-1254386949',
+    //bucket: 'dev-1254386949',
+    region: 'ap-guangzhou',
+    path: '/'
+});
+
 fs.open('./build/env.js', 'w', function(err, fd) {
     const buf = 'export default "production";';
     fs.write(fd, buf, 0, buf.length, 0, function(err, written, buffer) {});
@@ -16,11 +28,12 @@ fs.open('./build/env.js', 'w', function(err, fd) {
 
 module.exports = merge(webpackBaseConfig, {
     output: {
-        publicPath: 'https://iview.github.io/iview-admin/dist/',
+        publicPath: 'https://shop.admin.htmlk.cn/dist/',
         filename: '[name].[hash].js',
         chunkFilename: '[name].[hash].chunk.js'
     },
     plugins: [
+        cosPlugin,
         new cleanWebpackPlugin(['dist/*'], {
             root: path.resolve(__dirname, '../')
         }),

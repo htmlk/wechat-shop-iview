@@ -1,7 +1,6 @@
 <style lang="less">
-    @import './login.less';
+@import './login.less';
 </style>
-
 <template>
     <div class="login" @keydown.enter="handleSubmit">
         <div class="login-con">
@@ -12,16 +11,16 @@
                 </p>
                 <div class="form-con">
                     <Form ref="loginForm" :model="form" :rules="rules">
-                        <FormItem prop="userName">
-                            <Input v-model="form.userName" placeholder="请输入用户名">
-                                <span slot="prepend">
+                        <FormItem prop="username">
+                            <Input v-model="form.username" placeholder="请输入用户名">
+                            <span slot="prepend">
                                     <Icon :size="16" type="person"></Icon>
                                 </span>
                             </Input>
                         </FormItem>
                         <FormItem prop="password">
                             <Input type="password" v-model="form.password" placeholder="请输入密码">
-                                <span slot="prepend">
+                            <span slot="prepend">
                                     <Icon :size="14" type="locked"></Icon>
                                 </span>
                             </Input>
@@ -35,18 +34,18 @@
         </div>
     </div>
 </template>
-
 <script>
 import Cookies from 'js-cookie';
+import util from '../libs/util.js'
 export default {
-    data () {
+    data() {
         return {
             form: {
-                userName: '',
+                username: '',
                 password: ''
             },
             rules: {
-                userName: [
+                username: [
                     { required: true, message: '账号不能为空', trigger: 'blur' }
                 ],
                 password: [
@@ -56,20 +55,31 @@ export default {
         };
     },
     methods: {
-        handleSubmit () {
+        handleSubmit() {
+            console.log(util)
+            var _that = this
             this.$refs.loginForm.validate((valid) => {
                 if (valid) {
-                    Cookies.set('user', this.form.userName);
-                    this.$router.push({
-                        name: 'home_index'
-                    });
+                    this.$store.dispatch('login', this.form)
+                        .then(function(res) {
+                            console.log(res)
+                            if (res.errno == 0) {
+                                Cookies.set('token', res.data.token);
+                                Cookies.set('userInfo',res.data.userInfo)
+                                _that.$router.push({
+                                    name: 'goodslist'
+                                });
+                            } else {
+                                _that.$Message.error(res.errmsg)
+                            }
+                        })
+                    // Cookies.set('user', this.form.userName);
+
                 }
             });
         }
     }
 };
 </script>
-
 <style>
-
 </style>

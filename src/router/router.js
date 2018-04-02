@@ -49,37 +49,75 @@ export const otherRouter = {
 
 // 作为Main组件的子页面展示并且在左侧菜单显示的路由写在appRouter里
 export const appRouter = [
-    {
-        path: '/group',
-        icon: 'ios-folder',
-        name: 'group',
-        title: 'Group',
+    // {
+    //     path: '/order',
+    //     icon: 'ios-folder',
+    //     name: '',
+    //     title: '主页',
+    //     component: Main,
+    //     children: [
+    //         {
+    //             path: 'page1',
+    //             icon: 'ios-paper-outline',
+    //             name: 'page1',
+    //             title: 'Page1',
+    //             component: resolve => { require(['@/views/group/page1/page1.vue'], resolve); }
+    //         },
+    //         {
+    //             path: 'page2',
+    //             icon: 'ios-list-outline',
+    //             name: 'page2',
+    //             title: 'Page2',
+    //             component: resolve => { require(['@/views/group/page2/page2.vue'], resolve); }
+    //         }
+    //     ]
+    // },
+     {
+        path: '/goods',
+        icon: 'ios-paper',
+        title: '商品信息',
+        name: 'goods',
         component: Main,
         children: [
-            {
-                path: 'page1',
-                icon: 'ios-paper-outline',
-                name: 'page1',
-                title: 'Page1',
-                component: resolve => { require(['@/views/group/page1/page1.vue'], resolve); }
-            },
-            {
-                path: 'page2',
-                icon: 'ios-list-outline',
-                name: 'page2',
-                title: 'Page2',
-                component: resolve => { require(['@/views/group/page2/page2.vue'], resolve); }
-            }
+            { path: 'index', title: 'Page', name: 'goodslist', component: resolve => { require(['@/views/goods/goods.vue'], resolve); } }
         ]
     },
     {
-        path: '/page',
+        path: '/order',
         icon: 'ios-paper',
-        title: 'Page',
-        name: 'page',
+        title: '订单信息',
+        name: 'order',
         component: Main,
         children: [
-            { path: 'index', title: 'Page', name: 'page_index', component: resolve => { require(['@/views/page/page.vue'], resolve); } }
+            { path: 'index', title: 'Page', name: 'orderlist', component: resolve => { require(['@/views/order/order.vue'], resolve); } }
+        ]
+    },
+    {
+        path: '/user',
+        icon: 'ios-paper',
+        title: '用户信息',
+        name: 'user',
+        component: Main,
+        children: [
+            { path: 'index', title: 'Page', name: 'userlist', component: resolve => { require(['@/views/user/user.vue'], resolve); } }
+        ]
+    },{
+        path: '/finance',
+        icon: 'ios-paper',
+        title: '财务管理',
+        name: 'finance',
+        component: Main,
+        children: [
+            { path: 'index', title: 'Page', name: 'finance', component: resolve => { require(['@/views/finance/finance.vue'], resolve); } }
+        ]
+    },{
+        path: '/setup',
+        icon: 'ios-paper',
+        title: '系统操作',
+        name: 'setup',
+        component: Main,
+        children: [
+            { path: 'index', title: 'Page', name: 'setup', component: resolve => { require(['@/views/setup/setup.vue'], resolve); } }
         ]
     }
 ];
