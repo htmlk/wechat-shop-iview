@@ -49,29 +49,7 @@ export const otherRouter = {
 
 // 作为Main组件的子页面展示并且在左侧菜单显示的路由写在appRouter里
 export const appRouter = [
-    // {
-    //     path: '/order',
-    //     icon: 'ios-folder',
-    //     name: '',
-    //     title: '主页',
-    //     component: Main,
-    //     children: [
-    //         {
-    //             path: 'page1',
-    //             icon: 'ios-paper-outline',
-    //             name: 'page1',
-    //             title: 'Page1',
-    //             component: resolve => { require(['@/views/group/page1/page1.vue'], resolve); }
-    //         },
-    //         {
-    //             path: 'page2',
-    //             icon: 'ios-list-outline',
-    //             name: 'page2',
-    //             title: 'Page2',
-    //             component: resolve => { require(['@/views/group/page2/page2.vue'], resolve); }
-    //         }
-    //     ]
-    // },
+
      {
         path: '/goods',
         icon: 'ios-paper',
@@ -109,6 +87,28 @@ export const appRouter = [
         component: Main,
         children: [
             { path: 'index', title: 'Page', name: 'finance', component: resolve => { require(['@/views/finance/finance.vue'], resolve); } }
+        ]
+    }, {
+        path: '/card',
+        icon: 'ios-folder',
+        name: 'card',
+        title: '卡券管理',
+        component: Main,
+        children: [
+            {
+                path: 'addcard',
+                icon: 'ios-paper-outline',
+                name: 'addcard',
+                title: '发放卡券',
+                component: resolve => { require(['@/views/card/addcard/addcard.vue'], resolve); }
+            },
+            {
+                path: 'codecard',
+                icon: 'ios-list-outline',
+                name: 'codecard',
+                title: '卡券核销',
+                component: resolve => { require(['@/views/card/codecard/codecard.vue'], resolve); }
+            }
         ]
     },{
         path: '/setup',

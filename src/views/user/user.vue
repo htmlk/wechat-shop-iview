@@ -90,7 +90,8 @@ export default {
                     render: function(h, params) {
                         return h('div',
                             new Date(this.row.last_login_time * 1000).Format('yyyy-MM-dd hh:mm:ss')); /*这里的this.row能够获取当前行的数据*/
-                    }
+                    },
+                      sortable: true
                 }
 
             ],

@@ -256,7 +256,7 @@ export default {
                
         },
         sendmsg() {
-
+            //发货
             var _that = this
             var url = util.baseUrl + '/order/sendmsg?orderId=' + _that.orderInfo.id
             api.get(url).then(function(res) {
@@ -267,6 +267,7 @@ export default {
             })
         },
         changeorderstatus(e) {
+            //订单状态
             var _that = this
             var url = util.baseUrl + '/order/orderstatus?orderId=' + _that.orderid + '&orderStatus=' + e
             api.get(url).then(function(res) {
